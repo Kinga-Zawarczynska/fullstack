@@ -8,3 +8,18 @@ body {
 #__next {
   height: 100%;
 }
+
+.offer {
+  margin: 3%;
+  padding: 3%;
+  background: rgb(252,70,107)
+}
+
+.offers-container {
+  overflow: scroll;
+  width: 100%;
+}
+
+.title {
+  font-weight: bold;
+}

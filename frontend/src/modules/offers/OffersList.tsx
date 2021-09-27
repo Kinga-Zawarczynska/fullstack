@@ -1,19 +1,38 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-export const OffersList = () => {
-  useEffect(() => {
-    // TODO Here you might make a proper request from http://localhost:3001
-  }, []);
-
+interface IProps {
+  offers: {title: string, pubishedAt: string, lon: number, lat: number, id: string}[]
+}
+export const OffersList = ({offers}: IProps) => {
   return (
     <Flex
       alignItems="center"
       justifyContent="center"
-      backgroundColor="#19a56f"
+      backgroundColor="white"
       height="100%"
+      width="100%"
+      className="offers-container"
     >
-      <Box fontSize={24}>List</Box>
+      <Box fontSize={24}>
+        <Flex
+        flexDirection="column"
+        >
+          {!offers && <Box><p>No jobs found for a given term</p></Box>}
+         {offers?.map((offer: any) => {
+           const publishedDate = (new Date(offer?.publishedAt)).toLocaleDateString()
+           const publishedTime = (new Date(offer?.publishedAt)).toLocaleTimeString()
+           return (
+           <Box 
+            key={offer?.id}
+            flexDirection="column"
+            className="offer" >
+            <p className="title">{offer?.title}</p>
+           <p>Published: {publishedDate}, {publishedTime}</p>
+          </Box>)
+         })}
+        </Flex>
+      </Box>
     </Flex>
   );
 };
