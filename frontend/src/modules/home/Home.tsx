@@ -5,19 +5,24 @@ import { Map } from '../map/Map';
 import { OffersList } from '../offers/OffersList';
 import { fetchOffers } from '../../utils/fetchOffers';
 
-interface IOffers {
-  offers: {title: string, pubishedAt: string, lon: number, lat: number, id: string}[]
+interface ISearchTerm {
+  searchTerm: string
 }
 
 const Home = () => {
-  const [offers, setOffers] = useState<IOffers["offers"]>([])
-  useEffect(() => {
-    fetchOffers().then(fetchedOffers => setOffers(fetchedOffers[0]))
-  }, []);
-
+  const [searchTerm, setSearchTerm] = useState<ISearchTerm["searchTerm"]>("")
+  
   return (
     <Flex height="100%" flexDirection="column">
-      <Header offers={offers} />
+      <Header setSearchTerm={setSearchTerm} />
+      <Flex flexDirection="row" flex={1} minHeight={0}>
+        <Box flexBasis={600}>
+          <OffersList searchTerm={searchTerm} />
+        </Box>
+        <Box flex={1}>
+          <Map />
+        </Box>
+      </Flex>
     </Flex>
   );
 };

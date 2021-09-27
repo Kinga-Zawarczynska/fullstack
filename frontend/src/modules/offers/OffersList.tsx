@@ -1,10 +1,21 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchOffers } from '../../utils/fetchOffers';
 
 interface IProps {
-  offers: {title: string, pubishedAt: string, lon: number, lat: number, id: string}[]
+  searchTerm: string
 }
-export const OffersList = ({offers}: IProps) => {
+interface IOffers {
+  offers: {title: string, pubishedAt: string, lon: number, lat: number, id: string}[],
+}
+
+export const OffersList = ({searchTerm}: IProps) => {
+const [offers, setOffers] = useState<IOffers["offers"]>([])
+
+  useEffect(() => {
+    searchTerm ? fetchOffers(searchTerm).then(fetchedOffers => setOffers(fetchedOffers[0])) : fetchOffers().then(fetchedOffers => setOffers(fetchedOffers[0]))
+  }, [searchTerm]);
+
   return (
     <Flex
       alignItems="center"
@@ -18,7 +29,7 @@ export const OffersList = ({offers}: IProps) => {
         <Flex
         flexDirection="column"
         >
-          {!offers && <Box><p>No jobs found for a given term</p></Box>}
+          {offers.length === 0 && <Box><p>No jobs found for a given term</p></Box>}
          {offers?.map((offer: any) => {
            const publishedDate = (new Date(offer?.publishedAt)).toLocaleDateString()
            const publishedTime = (new Date(offer?.publishedAt)).toLocaleTimeString()
