@@ -16,11 +16,6 @@ export const Header = ({ setSearchTerm }: IProps) => {
     setSearchTerm(term)
   }
 
-	// useEffect(() => {
-	//     let results = offers && offers?.filter(item => item?.title.toLowerCase().includes(searchTerm.toLowerCase()))
-	//     setSearchResults(results)
-	//   }, [offers, searchTerm]);
-
 	return (
 		<Flex height={100} alignItems="center" justifyContent="center" backgroundColor="#dedede">
 			<Box fontSize={24}>
