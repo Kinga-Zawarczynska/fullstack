@@ -16,8 +16,8 @@ export const Map = ({markers}: IMap) => {
 	};
 
 	const defaultCenter = {
-		lat: markers[0]?.location.lat || 50.0618971,
-		lng: markers[0]?.location.lng || 19.9367559
+		lat: (markers && markers[0]?.location.lat) || 50.0618971,
+		lng: (markers &&markers[0]?.location.lng) || 19.9367559
   };
   
 
@@ -31,7 +31,7 @@ export const Map = ({markers}: IMap) => {
           zoom={6}
           center={defaultCenter}
           >
-            {markers.map(item => {
+            {markers?.map(item => {
               return (
               <Marker key={item.id} position={item.location} />
               )

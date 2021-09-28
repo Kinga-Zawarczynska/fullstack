@@ -11,10 +11,16 @@ interface IHome {
 	markers: { location: { lat: number; lng: number }; title: string; id: string; key: string }[];
 }
 
+let internetConnected = true;
+
 const Home = () => {
 	const [ searchTerm, setSearchTerm ] = useState<IHome['searchTerm']>('');
 	const [ offers, setOffers ] = useState<IHome['offers']>([]);
 	const [ markers, setMarkers ] = useState<IHome['markers']>([]);
+
+	useEffect(() => {
+		internetConnected = window.navigator.onLine;
+	}, [])
 
 	useEffect(
 		() => {
@@ -27,7 +33,7 @@ const Home = () => {
 
 	useEffect(
 		() => {
-			const markers = offers.map((item) => ({
+			const markers = offers?.map((item) => ({
 				location: {
 					lat: item.lat,
 					lng: item.lon
@@ -44,6 +50,10 @@ const Home = () => {
 		},
 		[ offers ]
 	);
+
+	if (!internetConnected) {
+		return <Flex height="100%" alignItems="center" justifyContent="center" flexDirection="column"><Box><h1>No internet connection detected.</h1></Box></Flex>
+	}
 
 	return (
 		<Flex height="100%" flexDirection="column">

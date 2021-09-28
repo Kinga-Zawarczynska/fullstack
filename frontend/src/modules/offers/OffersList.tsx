@@ -23,7 +23,7 @@ export const OffersList = ({offers, setMarkers}: IOffers) => {
         <Flex
         flexDirection="column"
         >
-          {offers.length === 0 && <Box><p>No jobs found for a given term</p></Box>}
+          {!offers && <Box className="no-jobs"><h2>No jobs found.</h2></Box>}
          {offers?.map((offer: IValues["offer"]) => {
            const publishedDate = (new Date(offer?.publishedAt)).toLocaleDateString()
            const publishedTime = (new Date(offer?.publishedAt)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})

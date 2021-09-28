@@ -17,20 +17,20 @@ export const Header = ({ setSearchTerm }: IProps) => {
 	};
 
 	return (
-		<Flex height={100} alignItems="center" justifyContent="center" backgroundColor="#dedede">
-			<Box fontSize={24}>
-				<section>
-					<input
-						type="text"
-						placeholder="Search"
-						value={term}
-						onChange={handleChange}
-						className="searchBar"
-					/>
-					<Button loadingText="Submitting" colorScheme="teal" variant="outline" onClick={handleOnClick}>
-						Submit
-					</Button>
-				</section>
+		<Flex height={100} alignItems="center" justifyContent="center" backgroundColor="#9D4683">
+			<Box fontSize={24} className="search">
+				<input type="text" placeholder="Search" value={term} onChange={handleChange} className="searchBar" />
+				<Button
+					size="md"
+					className="button"
+					variant="solid"
+					height="30px"
+					width="100px"
+					border="2px"
+					onClick={handleOnClick}
+				>
+					Submit
+				</Button>
 			</Box>
 		</Flex>
 	);

@@ -25,3 +25,20 @@ body {
   font-weight: bold;
 }
 
+.search {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: rgb(241, 159, 210);
+  border-radius: 5px;
+  margin: 0 5%;
+}
+
+.no-jobs {
+  display: flex;
+  justify-content: center;
+  height: 85vh;
+  align-items: center;
+}
