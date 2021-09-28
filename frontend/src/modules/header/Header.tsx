@@ -1,5 +1,5 @@
 import { Box, Flex, Button } from '@chakra-ui/react';
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 
 interface IProps {
 	setSearchTerm: Dispatch<SetStateAction<string>>;
@@ -10,11 +10,11 @@ export const Header = ({ setSearchTerm }: IProps) => {
 
 	const handleChange = (event: { target: HTMLInputElement }) => {
 		setTerm(event.target.value);
-  };
-  
-  const handleOnClick = () => {
-    setSearchTerm(term)
-  }
+	};
+
+	const handleOnClick = () => {
+		setSearchTerm(term);
+	};
 
 	return (
 		<Flex height={100} alignItems="center" justifyContent="center" backgroundColor="#dedede">

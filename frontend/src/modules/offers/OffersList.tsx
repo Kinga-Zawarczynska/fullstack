@@ -1,6 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
-import { fetchOffers } from '../../utils/fetchOffers';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface IValues {
   values: {location: { lat: number, lng: number, }, title: string, id: string, key: string},

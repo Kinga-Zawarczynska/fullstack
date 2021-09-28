@@ -24,22 +24,20 @@ export const Map = ({markers}: IMap) => {
 	return (
 		<Flex className="map-box" alignItems="center" justifyContent="center" backgroundColor="#ffffff" height="100%">
 			<Box fontSize={24} >
-      <LoadScript
-       googleMapsApiKey='AIzaSyDRAzoJ0PKcVPrOyt5vGcc0KNKq1DX2jjc'>
-        <GoogleMap
+        <LoadScript
+        googleMapsApiKey='AIzaSyDRAzoJ0PKcVPrOyt5vGcc0KNKq1DX2jjc'>
+          <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={6}
           center={defaultCenter}
           >
-            {
-            markers.map(item => {
+            {markers.map(item => {
               return (
               <Marker key={item.id} position={item.location} />
               )
-            })
-         }
+            })}
           </GoogleMap>
-     </LoadScript>
+        </LoadScript>
 			</Box>
 		</Flex>
 	);
