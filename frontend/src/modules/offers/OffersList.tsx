@@ -1,49 +1,45 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { fetchOffers } from '../../utils/fetchOffers';
 
-interface IProps {
-  searchTerm: string
+interface IValues {
+  values: {location: { lat: number, lng: number, }, title: string, id: string, key: string},
+  offer: {title: string, publishedAt: string, lon: number, lat: number, id: string}
 }
 interface IOffers {
-  offers: {title: string, pubishedAt: string, lon: number, lat: number, id: string}[],
+  offers: {title: string, publishedAt: string, lon: number, lat: number, id: string}[],
+  setMarkers: Dispatch<SetStateAction<IValues["values"][]>>
 }
 
-export const OffersList = ({searchTerm}: IProps) => {
-const [offers, setOffers] = useState<IOffers["offers"]>([])
+export const OffersList = ({offers, setMarkers}: IOffers) => {
 
-  useEffect(() => {
-    searchTerm ? fetchOffers(searchTerm).then(fetchedOffers => setOffers(fetchedOffers[0])) : fetchOffers().then(fetchedOffers => setOffers(fetchedOffers[0]))
-  }, [searchTerm]);
+  const handleClick = (values: IValues["values"]) => {
+    const valuesArray = [values]
+    setMarkers(valuesArray)}
 
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      backgroundColor="white"
-      height="100%"
-      width="100%"
-      className="offers-container"
-    >
-      <Box fontSize={24}>
+      <Box fontSize={24} height="100%"
+        width="100%"
+        className="offers-container" >
         <Flex
         flexDirection="column"
         >
           {offers.length === 0 && <Box><p>No jobs found for a given term</p></Box>}
-         {offers?.map((offer: any) => {
+         {offers?.map((offer: IValues["offer"]) => {
            const publishedDate = (new Date(offer?.publishedAt)).toLocaleDateString()
-           const publishedTime = (new Date(offer?.publishedAt)).toLocaleTimeString()
+           const publishedTime = (new Date(offer?.publishedAt)).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
            return (
            <Box 
             key={offer?.id}
             flexDirection="column"
-            className="offer" >
+            className="offer"
+            onClick={() => handleClick({location: { lat: offer.lat, lng: offer.lon, }, title: offer.title, id: offer.id, key: offer.id})}
+            >
             <p className="title">{offer?.title}</p>
            <p>Published: {publishedDate}, {publishedTime}</p>
           </Box>)
          })}
         </Flex>
       </Box>
-    </Flex>
   );
 };

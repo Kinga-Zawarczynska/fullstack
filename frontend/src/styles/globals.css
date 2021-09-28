@@ -12,14 +12,16 @@ body {
 .offer {
   margin: 3%;
   padding: 3%;
-  background: rgb(252,70,107)
+  background: rgb(252,70,107);
+  cursor: pointer;
 }
 
 .offers-container {
   overflow: scroll;
-  width: 100%;
+  position: relative;
 }
 
 .title {
   font-weight: bold;
 }
+
